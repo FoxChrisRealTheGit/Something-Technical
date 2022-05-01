@@ -9,5 +9,5 @@ import (
 // layer and allows for the associated handlerFunc
 // methods to resolve route logic
 type Server struct {
-	DB persistence.IProductDB
+	DB *persistence.ProductDB
 }
