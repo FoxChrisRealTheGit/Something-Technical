@@ -25,7 +25,7 @@ func NewPersistence(dialect, connectionInfo string) (*ProductPersistence, error)
 func (db *ProductPersistence) MigrateDBUP() error {
 	// run the migrate here
 	migrations := &migrate.FileMigrationSource{
-		Dir: "../resources/migrations",
+		Dir: "resources/migrations",
 	}
 	n, err := migrate.Exec(db.Postgres.DB, "postgres", migrations, migrate.Up)
 	if err != nil {
@@ -41,7 +41,7 @@ func (db *ProductPersistence) MigrateDBUP() error {
 func (db *ProductPersistence) MigrateDBDown() error {
 	// run the migrate here
 	migrations := &migrate.FileMigrationSource{
-		Dir: "../resources/migrations",
+		Dir: "resources/migrations",
 	}
 	n, err := migrate.Exec(db.Postgres.DB, "postgres", migrations, migrate.Down)
 	if err != nil {
