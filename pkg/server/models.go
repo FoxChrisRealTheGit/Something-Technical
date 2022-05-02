@@ -1,7 +1,7 @@
 package server
 
 import (
-	"something-technical/v1/pkg/persistence"
+	"something-technical/v1/pkg/internal/persistence"
 )
 
 // Server struct acts as the main struct for the

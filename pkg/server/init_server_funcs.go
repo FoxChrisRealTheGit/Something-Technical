@@ -2,7 +2,7 @@ package server
 
 import (
 	"log"
-	"something-technical/v1/pkg/persistence"
+	"something-technical/v1/pkg/internal/persistence"
 	"something-technical/v1/resources/config"
 )
 
