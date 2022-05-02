@@ -20,7 +20,7 @@ func (s *Server) CreateProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp, err := s.DB.CreateProduct(form)
+	resp, err := s.Persistence.CreateProduct(form)
 	if err != nil {
 		helpers.SendErrorHeader(w, http.StatusBadRequest,
 			routemodels.InternalError{
@@ -44,7 +44,7 @@ func (s *Server) GetProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp, err := s.DB.GetProduct(reqID)
+	resp, err := s.Persistence.GetProduct(reqID)
 	if err != nil {
 		helpers.SendErrorHeader(w, http.StatusBadRequest,
 			routemodels.InternalError{

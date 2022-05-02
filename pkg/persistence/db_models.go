@@ -6,7 +6,7 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-type ProductDB struct {
+type ProductPersistence struct {
 	Postgres *sqlx.DB
 	IProductDB
 }

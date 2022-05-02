@@ -17,7 +17,7 @@ func NewServer(cfg config.Config) *Server {
 	}
 
 	return &Server{
-		DB: db,
+		Persistence: db,
 	}
 }
 
@@ -27,7 +27,7 @@ func (s *Server) MigrateDBUP() error {
 	migrations := &migrate.FileMigrationSource{
 		Dir: "../resources/migrations",
 	}
-	n, err := migrate.Exec(s.DB.Postgres.DB, "postgres", migrations, migrate.Up)
+	n, err := migrate.Exec(s.Persistence.Postgres.DB, "postgres", migrations, migrate.Up)
 	if err != nil {
 		// Handle errors!
 		log.Println(err)
@@ -43,7 +43,7 @@ func (s *Server) MigrateDBDown() error {
 	migrations := &migrate.FileMigrationSource{
 		Dir: "../resources/migrations",
 	}
-	n, err := migrate.Exec(s.DB.Postgres.DB, "postgres", migrations, migrate.Down)
+	n, err := migrate.Exec(s.Persistence.Postgres.DB, "postgres", migrations, migrate.Down)
 	if err != nil {
 		// Handle errors!
 		log.Println(err)

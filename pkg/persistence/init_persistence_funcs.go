@@ -6,7 +6,7 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-func NewPersistence(dialect, connectionInfo string) (*ProductDB, error) {
+func NewPersistence(dialect, connectionInfo string) (*ProductPersistence, error) {
 	db, err := sqlx.Open(dialect, connectionInfo)
 	if err != nil {
 		log.Println("Error connecting to DB")
@@ -14,7 +14,7 @@ func NewPersistence(dialect, connectionInfo string) (*ProductDB, error) {
 		return nil, err
 	}
 
-	return &ProductDB{
+	return &ProductPersistence{
 		Postgres: db,
 	}, nil
 }
