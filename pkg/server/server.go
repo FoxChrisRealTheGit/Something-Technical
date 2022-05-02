@@ -6,6 +6,8 @@ import (
 	"net/http"
 	helpers "something-technical/v1/pkg/internal/helpers"
 	routemodels "something-technical/v1/pkg/internal/route-models"
+
+	"github.com/gorilla/mux"
 )
 
 // CreateProduct will parse the json request and create the desired
@@ -25,14 +27,22 @@ func (s *Server) CreateProduct(w http.ResponseWriter, r *http.Request) {
 				Code:    routemodels.INCORRECT_PRODUCT_CODE,
 				Message: routemodels.INCORRECT_PRODUCT_MSG,
 			})
+		return
 	}
 
 	helpers.SendSuccessHeader(w, resp)
 }
 
 func (s *Server) GetProduct(w http.ResponseWriter, r *http.Request) {
-	// grab id
-	reqID := ""
+	reqID := mux.Vars(r)["id"]
+	if reqID == "" {
+		helpers.SendErrorHeader(w, http.StatusBadRequest,
+			routemodels.InternalError{
+				Code:    routemodels.NO_PRODUCT_CODE,
+				Message: routemodels.NO_PRODUCT_MSG,
+			})
+		return
+	}
 
 	resp, err := s.DB.GetProduct(reqID)
 	if err != nil {
@@ -41,6 +51,7 @@ func (s *Server) GetProduct(w http.ResponseWriter, r *http.Request) {
 				Code:    routemodels.INCORRECT_PRODUCT_CODE,
 				Message: routemodels.INCORRECT_PRODUCT_MSG,
 			})
+		return
 	}
 
 	helpers.SendSuccessHeader(w, resp)
