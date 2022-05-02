@@ -3,6 +3,7 @@ package routemodels
 // CreateProductRequest is the request desired to
 // create a single product
 type CreateProductRequest struct {
+	VendorID string `json:"ID" db:"id"`
 	SlimProductInformation
 }
 
